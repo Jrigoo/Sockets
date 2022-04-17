@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #sample {
+        background-color: red;
+        width: 300px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Communicating from an Arduino to Node.js</h1>
+    <div id="sample"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module">
+      import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+      const socket = io("https://sockets-arduino.herokuapp.com/");
+
+      const sample = document.getElementById("sample");
+      socket.on("client", (data) => {
+        console.log(data);
+        sample.style.opacity = data / 100;
+      });
+    </script>
+  </body>
+</html>
