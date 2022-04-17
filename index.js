@@ -10,7 +10,7 @@ app.use(
       "*",
       "http://localhost:5500",
       "http://127.0.0.1:5500",
-      "https://regal-phoenix-98fa39.netlify.app/",
+      "https://sockets-jrigoo.netlify.app/",
     ],
   })
 );
@@ -26,7 +26,7 @@ const io = new Server(server, {
       "*",
       "http://localhost:5500",
       "http://127.0.0.1:5500",
-      "https://regal-phoenix-98fa39.netlify.app/",
+      "https://sockets-jrigoo.netlify.app/",
     ],
   },
 });
