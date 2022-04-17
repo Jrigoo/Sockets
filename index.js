@@ -14,16 +14,6 @@ app.use(function (req, res, next) {
   );
   next();
 });
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5500",
-      "http://127.0.0.1:5500",
-      "https://sockets-jrigoo.netlify.app/",
-      "https://jrigoo.github.io/Sockets/",
-    ],
-  })
-);
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello to ta cool</h1>");
