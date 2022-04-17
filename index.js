@@ -10,6 +10,10 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.send("<h1>Hello to ta cool</h1>");
+});
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -24,5 +28,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(3000, () => {
-  console.log("listening on 3000");
+  console.log("listening on http://localhost:3000");
 });
