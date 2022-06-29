@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+      crossorigin=""
+    />
     <style>
       #sample {
         background-color: red;
         width: 300px;
         height: 300px;
       }
+      #map {
+        height: 80vh;
+      }
     </style>
   </head>
   <body>
-    <h1>Communicating from an Arduino to Node.js</h1>
-    <div id="sample"></div>
+    <h1>Donde está el carrito</h1>
+    <div id="map"></div>
+    <script
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="module">
       import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
       const socket = io("https://sockets-arduino.herokuapp.com/");
 
-      const sample = document.getElementById("sample");
+      const map = L.map("map").setView(
+        [9.022119222956155, -79.53200176932802],
+        17
+      );
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+
+      function remove(marker) {
+        map.removeLayer(marker);
+      }
+
       socket.on("client", (data) => {
         console.log(data);
-        sample.style.opacity = data / 100;
+        L.popup().setLatLng(data).setContent("Acá").openOn(map);
       });
     </script>
   </body>
