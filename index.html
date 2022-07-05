@@ -20,7 +20,26 @@
   </head>
   <body>
     <h1>Donde está el carrito</h1>
-    <div id="map"></div>
+    <p>Presiona W A S D</p>
+    <p id="log"></p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module">
+      import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
+      //const socket = io("https://sockets-arduino.herokuapp.com/");
+      const socket = io("http://localhost:3000/");
+
+      document.addEventListener("keypress", logKey);
+      function logKey(e) {
+        const direcciones = {
+          W: "F",
+          S: "B",
+          A: "L",
+          D: "R",
+        };
+        socket.emit("actions", direcciones[e.code.toString().split("Key")[1]]);
+      }
+    </script>
+    <!--     <div id="map"></div>
     <script
       src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
       integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
@@ -44,10 +63,10 @@
         map.removeLayer(marker);
       }
 
-      socket.on("client", (data) => {
-        console.log(data);
-        L.popup().setLatLng(data).setContent("Acá").openOn(map);
+      socket.on("client", (gpsData) => {
+        console.log(gpsData);
+        L.popup().setLatLng(gpsData).setContent("Acá").openOn(map);
       });
-    </script>
+    </script> -->
   </body>
 </html>

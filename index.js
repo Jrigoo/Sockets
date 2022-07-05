@@ -31,9 +31,13 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  socket.on("data", (arg, callback) => {
+  socket.on("gpsData", (arg, callback) => {
     io.sockets.emit("client", arg);
+  });
+  socket.on("actions", (arg, callback) => {
+    io.sockets.emit("actions", arg);
   });
 });
 
-server.listen(process.env.PORT || 5000);
+server.listen(process.env.PORT || 3000);
+console.log(`Server on http://localhost:3000`);
