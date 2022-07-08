@@ -20,7 +20,7 @@ function coordenadas(t) {
     const longitud = gpsData[4];
     const satelites = gpsData[7];
 
-    socket.emit("gpsData", [coordenadas(latitud), -coordenadas(longitud)]);
+    socket.emit("gpsData", [coordenadas(latitud), -coordenadas(longitud)]); 
     console.log([coordenadas(latitud), -coordenadas(longitud)]);
   }
 }); */

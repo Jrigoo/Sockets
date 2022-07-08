@@ -16,7 +16,7 @@ function cor(t) {
   return corde;
 }
 
-parser.on("gpsData", (gpsData) => {
+parser.on("data", (gpsData) => {
   if (gpsData.toString().includes("$GPGGA")) {
     gpsData = gpsData.split(",");
     const latitud = gpsData[2];
