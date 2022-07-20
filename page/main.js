@@ -1,16 +1,7 @@
 import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
 const socket = io("https://sockets-arduino.herokuapp.com/");
-
-document.addEventListener("keypress", getKey);
-function getKey(e) {
-  const direcciones = {
-    W: "F",
-    S: "B",
-    A: "L",
-    D: "R",
-  };
-  socket.emit("actions", direcciones[e.code.toString().split("Key")[1]]);
-}
+//const temperature = document.getElementById("temperature");
+const coordenadas = document.getElementById("coordenadas");
 
 const map = L.map("map").setView([9.024020420461316, -79.53228258324731], 20);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -19,9 +10,15 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 socket.on("client", (data) => {
-  console.log(data);
+  console.log(`GPS Data: ${data}`);
   getPosition(data);
+  coordenadas.innerHTML = `${data[0]}, ${data[1]}`;
 });
+
+/* socket.on("temperature", (data) => {
+  //console.log(`Temperature Data: ${data}`);
+  temperature.innerHTML = `${data} grados`;
+});*/
 
 let marker;
 function getPosition(position) {
