@@ -40,6 +40,9 @@ io.on("connection", (socket) => {
   socket.on("dData", (arg, callback) => {
     io.sockets.emit("distance", arg);
   });
+  socket.on("tempData", (arg, callback) => {
+    io.sockets.emit("temperature", arg);
+  });
 });
 
 server.listen(process.env.PORT || 3000);

@@ -2,3 +2,5 @@ arduino/
 node_modules/
 .env
 env/
+Python
+gps.js
