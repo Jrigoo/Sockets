@@ -34,8 +34,11 @@ io.on("connection", (socket) => {
   socket.on("gpsData", (arg, callback) => {
     io.sockets.emit("client", arg);
   });
-  socket.on("actions", (arg, callback) => {
-    io.sockets.emit("actions", arg);
+  socket.on("cData", (arg, callback) => {
+    io.sockets.emit("camara", arg);
+  });
+  socket.on("dData", (arg, callback) => {
+    io.sockets.emit("distance", arg);
   });
 });
 
