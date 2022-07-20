@@ -16,7 +16,7 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  res.send("<h1>Hello to ta cool</h1>");
+  res.send("<h1>Hello to ta cool!</h1>");
 });
 
 const server = http.createServer(app);
